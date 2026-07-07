@@ -1,13 +1,18 @@
 namespace backend.Program;
 using backend.Models;
 using backend.Services;
+using backend.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 public class Program()
 {
     public static void Main(string[] args)
     {
+        //builder.Services.AddDbContext<TabelaContexto>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
         PessoaService pessoaService = new PessoaService();
         TransacaoService transacaoService = new TransacaoService();
+        TotalService totalService = new TotalService();
 
         pessoaService.CriarPessoa(1, "eduardo", 13);
         pessoaService.CriarPessoa(2, "pedro", 18);
@@ -19,6 +24,11 @@ public class Program()
 
         Console.WriteLine(">>>>>>>>Lista Pessoas:");
         pessoaService.ListarPessoas();
+
+        Console.WriteLine(">>>>>>>>Listar Transações:");
+        transacaoService.ListarTransacoes();
+
+        totalService.ListarValoresTotais();
 
         Console.WriteLine("\n-pessoa deletada");
         pessoaService.DeletarPessoa(2);

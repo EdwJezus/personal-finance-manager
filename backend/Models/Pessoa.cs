@@ -2,9 +2,9 @@ namespace backend.Models
 {
     public class Pessoa
     {
-        public int Id; //gerar automatico
-        public string Nome = "";
-        public int Idade;
+        public int Id { get; set; } //gerar automatico
+        public string Nome { get; set; } = ""; 
+        public int Idade { get; set; }
 
         public override string ToString()
         {

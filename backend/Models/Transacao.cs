@@ -2,11 +2,11 @@ namespace backend.Models
 {
     public class Transacao
     {
-        public int Id; //gerar automatico
-        public string Descricao = "";
-        public double Valor;
-        public string Tipo = "";
-        public int PessoaId; //Associação
+        public int Id { get; set; } //gerar automatico
+        public string Descricao { get; set; } = ""; 
+        public double Valor { get; set; }
+        public string Tipo { get; set; } = "";
+        public int PessoaId { get; set; } //Associação
 
         public override string ToString()
         {

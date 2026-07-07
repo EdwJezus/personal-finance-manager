@@ -41,7 +41,6 @@ public class TransacaoService
                 else // no caso da transação ser normal
                 {
                     Transacao transacao = new Transacao();
-                    transacao.Id = Id;
                     transacao.Descricao = Descricao;
                     transacao.Valor = Valor;
                     transacao.Tipo = Tipo;

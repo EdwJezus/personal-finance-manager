@@ -21,6 +21,7 @@ public class TotalService
             double receitas = 0.00;
             double despesas = 0.00;
 
+            // percorre as transações para calcular os valores da pessoa atual
             foreach(var t in _context.Transacoes)
             {
                 if(t.PessoaId == p.Id)
@@ -35,10 +36,13 @@ public class TotalService
                     }
                 }
             }
-            totalReceitas += receitas; // depois de percorrer todas transações da pessoa soma ao total de receitas o somatorio das receitas dela
-            totalDespesas += despesas; // mesma coisa com as despesas
+            // acumula os valores individuais para gerar o total geral
+            totalReceitas += receitas;
+            totalDespesas += despesas;
 
             TotalPessoaDto totalPessoa = new TotalPessoaDto();
+
+            // cria o resumo financeiro de cada pessoa
             totalPessoa.Id = p.Id;
             totalPessoa.PessoaReceita = receitas;
             totalPessoa.PessoaDespesa = despesas;
@@ -47,6 +51,7 @@ public class TotalService
             totalDto.TotaisPessoas.Add(totalPessoa);
         }
 
+        // define os valores financeiros gerais do sistema
         totalDto.TotalReceita = totalReceitas;
         totalDto.TotalDespesa = totalDespesas;
         totalDto.TotalSaldo = totalReceitas - totalDespesas;

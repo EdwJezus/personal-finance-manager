@@ -12,9 +12,9 @@ public class TotalService
 
     public TotalDto ListarValoresTotais()
     {
-        double total_receitas = 0.00;
-        double total_despesas = 0.00;
-        TotalDto total_dto = new TotalDto();
+        double totalReceitas = 0.00;
+        double totalDespesas = 0.00;
+        TotalDto totalDto = new TotalDto();
 
         foreach(var p in _context.Pessoas)
         {
@@ -35,22 +35,22 @@ public class TotalService
                     }
                 }
             }
-            total_receitas += receitas; // depois de percorrer todas transações da pessoa soma ao total de receitas o somatorio das receitas dela
-            total_despesas += despesas; // mesma coisa com as despesas
+            totalReceitas += receitas; // depois de percorrer todas transações da pessoa soma ao total de receitas o somatorio das receitas dela
+            totalDespesas += despesas; // mesma coisa com as despesas
 
-            TotalPessoaDto total_pessoa = new TotalPessoaDto();
-            total_pessoa.Id = p.Id;
-            total_pessoa.PessoaReceita = receitas;
-            total_pessoa.PessoaDespesa = despesas;
-            total_pessoa.PessoaSaldo = receitas - despesas;
+            TotalPessoaDto totalPessoa = new TotalPessoaDto();
+            totalPessoa.Id = p.Id;
+            totalPessoa.PessoaReceita = receitas;
+            totalPessoa.PessoaDespesa = despesas;
+            totalPessoa.PessoaSaldo = receitas - despesas;
         
-            total_dto.TotaisPessoas.Add(total_pessoa);
+            totalDto.TotaisPessoas.Add(totalPessoa);
         }
 
-        total_dto.TotalReceita = total_receitas;
-        total_dto.TotalDespesa = total_despesas;
-        total_dto.TotalSaldo = total_receitas - total_despesas;
+        totalDto.TotalReceita = totalReceitas;
+        totalDto.TotalDespesa = totalDespesas;
+        totalDto.TotalSaldo = totalReceitas - totalDespesas;
 
-        return total_dto;
+        return totalDto;
     }
 }

@@ -10,33 +10,33 @@ public class TransacaoService
         _context = context;
     }
 
-    public void CriarTransacao(string Descricao, double Valor, string Tipo, int PessoaId)
+    public void CriarTransacao(string descricao, double valor, string tipo, int pessoaId)
     {
-        bool id_compativel = false; // var auxiliar para foreach (para buscar pessoa com ID da transação)
-        Pessoa temp_pessoa = new Pessoa(); // var auxiliar verificar idade da pessoa no if no CriaTransacao
+        bool idCompativel = false; // var auxiliar para foreach (para buscar pessoa com ID da transação)
+        Pessoa tempPessoa = new Pessoa(); // var auxiliar verificar idade da pessoa no if no CriaTransacao
 
         foreach(var p in _context.Pessoas) // percorre pessoas
         {
-            if(p.Id == PessoaId) // verifica se existe uma pessoa com id igual a transação
+            if(p.Id == pessoaId) // verifica se existe uma pessoa com id igual a transação
             {
-                id_compativel = true; // existe a pessoa
-                temp_pessoa = p;
+                idCompativel = true; // existe a pessoa
+                tempPessoa = p;
                 break;
             }
         }
-        if(id_compativel) // se os ids foram compativeis
+        if(idCompativel) // se os ids foram compativeis
         {
-            if (temp_pessoa.Idade < 18 && Tipo.ToUpper() == "RECEITA") // verifica se uma transação de um menor foi registrada como RECEITA
+            if (tempPessoa.Idade < 18 && tipo.ToUpper() == "RECEITA") // verifica se uma transação de um menor foi registrada como RECEITA
             {
                 Console.WriteLine("!Menores de 18 só podem registrar DESPESAS!");
             }
             else // no caso da transação ser normal
             {
                 Transacao transacao = new Transacao();
-                transacao.Descricao = Descricao;
-                transacao.Valor = Valor;
-                transacao.Tipo = Tipo.ToUpper();
-                transacao.PessoaId = PessoaId;
+                transacao.Descricao = descricao;
+                transacao.Valor = valor;
+                transacao.Tipo = tipo.ToUpper();
+                transacao.PessoaId = pessoaId;
 
                 _context.Transacoes.Add(transacao);       
                 _context.SaveChanges();

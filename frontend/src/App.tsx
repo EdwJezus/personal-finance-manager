@@ -1,6 +1,8 @@
 import { useEffect, useState} from "react";
 import api from "./services/api";
 import type { Pessoa } from "./types/Pessoa";
+import PessoaList from "./components/PessoaList";
+import PessoaForm from "./components/PessoaForm";
 
 function App() {
 
@@ -56,43 +58,22 @@ function App() {
 
       <h1>Sistema Financeiro</h1>
 
-      {pessoas.map((pessoa) => (
-
-        <div key={pessoa.id}>
-
-          <h3>{pessoa.nome}</h3>
-
-          <p>Idade: {pessoa.idade}</p>
-
-          <button onClick={() => deletarPessoa(pessoa.id)}>
-            Excluir
-          </button>
-
-        </div>
-
-      ))}
+      <PessoaList
+          pessoas={pessoas}
+          deletarPessoa={deletarPessoa}
+      />
 
       {/* =================CADASTRO=================== */}
 
       <h2>Cadastrar Pessoa</h2>
 
-      <input
-        type="text"
-        placeholder="Nome"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
+      <PessoaForm
+          nome={nome}
+          idade={idade}
+          setNome={setNome}
+          setIdade={setIdade}
+          criarPessoa={criarPessoa}
       />
-
-      <input
-        type="number"
-        placeholder="Idade"
-        value={idade}
-        onChange={(e) => setIdade(Number(e.target.value))}
-      />
-
-      <button onClick={criarPessoa}>
-        Cadastrar
-      </button>
 
     </>
   );

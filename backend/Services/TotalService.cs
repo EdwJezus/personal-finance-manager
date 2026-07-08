@@ -1,8 +1,14 @@
 namespace backend.Services;
 using backend.Models;
+using backend.Contexts;
 
 public class TotalService
 {
+    private readonly TabelaContexto _context;
+    public TotalService(TabelaContexto context)
+    {
+        _context = context;
+    }
 
     public void ListarValoresTotais()
     {
@@ -11,12 +17,12 @@ public class TotalService
 
         Console.WriteLine("=======================================");
         Console.WriteLine("===========TOTAL POR PESSOA============");
-        foreach(var p in PessoaService.pessoas)
+        foreach(var p in _context.Pessoas)
         {
             double receitas = 0.00;
             double despesas = 0.00;
 
-            foreach(var t in PessoaService.transacoes)
+            foreach(var t in _context.Transacoes)
             {
                 if(t.PessoaId == p.Id)
                 {

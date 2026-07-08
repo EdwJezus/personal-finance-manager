@@ -10,7 +10,7 @@ public class PessoaService
         _context = context;
     }
 
-    public void CriarPessoa(string nome, int idade)
+    public string CriarPessoa(string nome, int idade)
     {
         Pessoa pessoa = new Pessoa();
 
@@ -21,9 +21,12 @@ public class PessoaService
         // adiciona a pessoa no contexto e salva no banco
         _context.Pessoas.Add(pessoa);
         _context.SaveChanges();
+
+        // alerta
+        return "Pessoa criada com sucesso";
     }
 
-    public void DeletarPessoa(int id)
+    public string DeletarPessoa(int id)
     {
         // carrega dados do banco para memória antes da remoção
         List<Pessoa> pessoas = _context.Pessoas.ToList();
@@ -44,12 +47,14 @@ public class PessoaService
             if(p.Id == id)
             {
                 _context.Pessoas.Remove(p);
-                break;
-            }
-        }
 
-        // salva todas as alterações realizadas no banco
-        _context.SaveChanges();
+                // salva todas as alterações realizadas no banco
+                _context.SaveChanges();
+
+                return "Pessoa removida com sucesso";
+            }       
+        }
+        return "!ID não encontrado!";
     }
 
     public List<Pessoa> ListarPessoas()

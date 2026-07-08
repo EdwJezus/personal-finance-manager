@@ -10,7 +10,7 @@ public class TransacaoService
         _context = context;
     }
 
-    public void CriarTransacao(string descricao, double valor, string tipo, int pessoaId)
+    public string CriarTransacao(string descricao, double valor, string tipo, int pessoaId)
     {
         bool idCompativel = false; 
         Pessoa tempPessoa = new Pessoa(); 
@@ -30,7 +30,7 @@ public class TransacaoService
             // menores de idade podem apenas registrar despesas
             if (tempPessoa.Idade < 18 && tipo.ToUpper() == "RECEITA")
             {
-                Console.WriteLine("!Menores de 18 só podem registrar DESPESAS!");
+                return "!Menores de 18 só podem registrar DESPESAS!";
             }
             else 
             {
@@ -45,12 +45,15 @@ public class TransacaoService
                 // adiciona a transação ao banco
                 _context.Transacoes.Add(transacao);       
                 _context.SaveChanges();
+
+                // alerta
+                return "Transação criada com sucesso";
             }
         }
         else
         {
             // impede cadastro de transação sem uma pessoa existente
-            Console.WriteLine("!ERRO! Esse ID de pessoa não existe!");
+            return "!ERRO! Esse ID de pessoa não existe!";
         }
     }
 

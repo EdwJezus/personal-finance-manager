@@ -17,16 +17,16 @@ public class PessoaController : ControllerBase
     [HttpPost]
     public IActionResult CriarPessoa(CriarPessoaDto dto)
     {
-        _pessoaService.CriarPessoa(dto.Nome, dto.Idade);
-        return Ok();
+        string mensagem = _pessoaService.CriarPessoa(dto.Nome, dto.Idade);
+        return Ok(mensagem);
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletarPessoa(int id)
     {
-        _pessoaService.DeletarPessoa(id);
+        string mensagem = _pessoaService.DeletarPessoa(id);
         
-        return Ok();
+        return Ok(mensagem);
     }
 
     [HttpGet]

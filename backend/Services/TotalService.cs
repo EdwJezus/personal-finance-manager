@@ -1,5 +1,4 @@
 namespace backend.Services;
-using backend.Models;
 using backend.Contexts;
 
 public class TotalService

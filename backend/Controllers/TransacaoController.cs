@@ -17,8 +17,8 @@ public class TransacaoController : ControllerBase
     [HttpPost]
     public IActionResult CriarTransacao(CriarTransacaoDto dto)
     {
-        _transacaoService.CriarTransacao(dto.Descricao, dto.Valor, dto.Tipo, dto.PessoaId);
-        return Ok();
+        string mensagem = _transacaoService.CriarTransacao(dto.Descricao, dto.Valor, dto.Tipo, dto.PessoaId);
+        return Ok(mensagem);
     }
 
     [HttpGet]

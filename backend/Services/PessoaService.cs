@@ -45,11 +45,8 @@ public class PessoaService
         _context.SaveChanges();
     }
 
-    public void ListarPessoas()
+    public List<Pessoa> ListarPessoas()
     {
-        foreach(var p in _context.Pessoas.ToList())
-        {
-            Console.WriteLine(p);
-        }
+        return _context.Pessoas.ToList();
     }
 }

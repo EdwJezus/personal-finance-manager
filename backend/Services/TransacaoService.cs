@@ -48,11 +48,8 @@ public class TransacaoService
         }
     }
 
-    public void ListarTransacoes()
+    public List<Transacao> ListarTransacoes()
     {
-        foreach(var t in _context.Transacoes)
-        {
-            Console.WriteLine(t);
-        }
+        return _context.Transacoes.ToList();
     }
 }

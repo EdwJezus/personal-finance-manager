@@ -21,13 +21,6 @@ public class PessoaController : ControllerBase
         return Ok();
     }
 
-    [HttpGet]
-    public IActionResult ListarPessoas()
-    {
-        List<Pessoa> pessoas = _pessoaService.ListarPessoas();
-        return Ok(pessoas);
-    }
-
     [HttpDelete("{id}")]
     public IActionResult DeletarPessoa(int id)
     {
@@ -35,5 +28,11 @@ public class PessoaController : ControllerBase
         
         return Ok();
     }
-}
 
+    [HttpGet]
+    public IActionResult ListarPessoas()
+    {
+        List<Pessoa> pessoas = _pessoaService.ListarPessoas();
+        return Ok(pessoas);
+    }
+}

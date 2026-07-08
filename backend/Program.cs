@@ -20,6 +20,19 @@ builder.Services.AddScoped<PessoaService>();
 builder.Services.AddScoped<TransacaoService>();
 builder.Services.AddScoped<TotalService>();
 
+// conexão com react
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("React",
+        policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -29,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("React");
 
 app.MapControllers();
 

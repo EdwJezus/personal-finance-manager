@@ -53,7 +53,7 @@ A aplicação possui uma interface desenvolvida em React contendo:
 
 ------------------------------------------------------------------------
 
-# Funcionalidades
+# Screenshot
 
 ## Dashboard
 

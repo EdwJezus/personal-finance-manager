@@ -32,7 +32,7 @@ public class TransacaoService
             {
                 return "!Menores de 18 só podem registrar DESPESAS!";
             }
-            else 
+            if (tipo.ToUpper() == "RECEITA" || tipo.ToUpper() == "DESPESA")
             {
                 Transacao transacao = new Transacao();
 
@@ -48,6 +48,10 @@ public class TransacaoService
 
                 // alerta
                 return "Transação criada com sucesso";
+            }
+            else 
+            {
+                return "!ERRO! Somente Tipos 'RECEITA' E 'DESPESA' são permitidos!";
             }
         }
         else

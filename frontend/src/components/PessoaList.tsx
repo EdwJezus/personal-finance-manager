@@ -17,6 +17,8 @@ function PessoaList({ pessoas, deletarPessoa }: Props) {
 
                     <p>Idade: {pessoa.idade}</p>
 
+                    <p>Id: {pessoa.id}</p>
+
                     <button onClick={() => deletarPessoa(pessoa.id)}>
                         Excluir
                     </button>

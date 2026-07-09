@@ -53,11 +53,11 @@ A aplicação possui uma interface desenvolvida em React contendo:
 
 ------------------------------------------------------------------------
 
-# Funcionalidades
+# Screenshot
 
 ## Dashboard
 
-
+<img width="1897" height="962" alt="Captura de tela - Sistema de Controle de Gastos Residenciais" src="https://github.com/user-attachments/assets/18f120e1-4c84-41a3-bdd9-75357131622e" />
 
 ------------------------------------------------------------------------
 

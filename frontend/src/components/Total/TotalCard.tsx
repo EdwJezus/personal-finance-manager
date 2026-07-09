@@ -1,4 +1,4 @@
-import type { Total } from "../types/Total";
+import type { Total } from "../../types/Total";
 
 interface Props {
     total: Total | null;

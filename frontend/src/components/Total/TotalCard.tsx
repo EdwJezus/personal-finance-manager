@@ -1,28 +1,17 @@
-import type { Total } from "../../types/Total";
-
 interface Props {
-    total: Total | null;
+    titulo: string;
+    valor: number;
 }
 
-function TotalCard({ total }: Props) {
-
-    if (!total) {
-        return <p>Carregando...</p>;
-    }
+function TotalCard({ titulo, valor }: Props) {
 
     return (
-        <>
-            <div>
-
-                <p>Total Receita: {total.totalReceita}</p>
-
-                <p>Total Despesa: {total.totalDespesa}</p>
-
-                <p>Total Saldo: {total.totalSaldo}</p>
-
-            </div>
-        </>
+        <div className="total-card">
+            <h3>{titulo}</h3>
+            <p>R$ {valor}</p>
+        </div>
     );
+
 }
 
 export default TotalCard;

@@ -33,7 +33,7 @@ fieldset{
 }
 
 .cardListarPessoas{
-    min-height: 54%;
+    min-height: 57%;
 }
 
 .cardPessoa{
@@ -183,44 +183,10 @@ td{
 }
 
 .listatransacoes-scroll{
-    max-height:185px;
+    max-height:190px;
     overflow-y:auto;
 }
 
 .cadastrarTransacao{
     padding-top: 20px;
-}
-
-/* Navbar */
-
-.navbar{
-    display:flex;
-    align-items:center;
-
-    margin-bottom:25px;
-
-    padding:18px 28px;
-
-    background:white;
-
-    border-radius:12px;
-
-    box-shadow:rgba(0,0,0,.08) 0 4px 12px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.logo img{
-    width:42px;
-    height:42px;
-}
-
-.logo h1{
-    margin:0;
-    font-size:1.8rem;
-    font-weight:700;
 }

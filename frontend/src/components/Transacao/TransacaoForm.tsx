@@ -1,11 +1,11 @@
-import type { Pessoa } from "../types/Pessoa";
+import type { Pessoa } from "../../types/Pessoa";
 
 interface Props {
     descricao: string;
     setDescricao: (valor: string) => void;
 
-    valor: number;
-    setValor: (valor: number) => void;
+    valor: number | "";
+    setValor: (valor: number | "") => void;
 
     tipo: string;
     setTipo: (valor: string) => void;
@@ -31,14 +31,20 @@ function TransacaoForm(props: Props) {
             onChange={(e) => props.setDescricao(e.target.value)}
         />
 
+        <br></br>
 
         <input
             type="number"
-            placeholder="Valor"
+            placeholder="Valor (R$)"
             value={props.valor}
-            onChange={(e) => props.setValor(Number(e.target.value))}
+            onChange={(e) =>
+                props.setValor(
+                    e.target.value === "" ? "" : Number(e.target.value)
+                )
+            }
         />
 
+        <br></br>
 
         <select
             value={props.tipo}
@@ -59,6 +65,7 @@ function TransacaoForm(props: Props) {
 
         </select>
 
+        <br></br>
 
         <select
             value={props.pessoaId}
@@ -84,8 +91,9 @@ function TransacaoForm(props: Props) {
 
         </select>
 
+        <br></br>
 
-        <button onClick={props.criarTransacao}>
+        <button onClick={props.criarTransacao} className="formButton">
             Cadastrar
         </button>
 

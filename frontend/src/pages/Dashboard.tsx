@@ -10,6 +10,7 @@ import TransacaoForm from "../components/Transacao/TransacaoForm";
 import TotalCard from "../components/Total/TotalCard";
 import TotalPessoaList from "../components/Total/TotalPessoaList";
 import "./Dashboard.css";
+import iconeHeader from "../assets/icons/header.png";
 
 function Dashboard() {
 
@@ -19,127 +20,127 @@ function Dashboard() {
 
   //////////////// PESSOAS /////////////////////////
 
-  // existe uma variavel chamada pessoas
-  // ela começa vazia mas obrigatoria sera uma lista de Pessoa
-  const [pessoas, setPessoas] = useState<Pessoa[]>([]);
+    // existe uma variavel chamada pessoas
+    // ela começa vazia mas obrigatoria sera uma lista de Pessoa
+    const [pessoas, setPessoas] = useState<Pessoa[]>([]);
 
-  // cadastro de pessoas
-  const [nome, setNome] = useState("");
-  const [idade, setIdade] = useState(0);
-
-
-  ////////////////// TRANSAÇÕES //////////////////////////////
-
-  const [transacoes, setTransacoes] = useState<Transacao[]>([]);
-
-  const [descricao, setDescricao] = useState("");
-  const [valor, setValor] = useState(0);
-  const [tipo, setTipo] = useState("");
-  const [pessoaId, setPessoaId] = useState(0);
+    // cadastro de pessoas
+    const [nome, setNome] = useState("");
+    const [idade, setIdade] = useState<number | "">("");
 
 
-  ////////////////// METODOS GERAIS //////////////////////////////
+    ////////////////// TRANSAÇÕES //////////////////////////////
 
-  const [total, setTotal] = useState<Total | null>(null);
+    const [transacoes, setTransacoes] = useState<Transacao[]>([]);
 
-
-  ///////////////////////////////////////////////////////////
-  ////////////////////// FUNÇÕES /////////////////////////////
-  ///////////////////////////////////////////////////////////
-
-  //////////////// PESSOAS /////////////////////////
-
-  // cadastro de pessoas
-  const criarPessoa = async () => {
-    const resposta = await api.post("/Pessoa", {
-      nome: nome,
-      idade: idade
-    });
-
-    setNome("");
-    setIdade(0);
-
-    alert(resposta.data);
-
-    carregarPessoas();
-    carregarTotais();
-  };
-
-  // receber pessoas
-  const carregarPessoas = async() =>
-  {
-    // usa GET da api para receber o JSON
-    const resposta = await api.get("/Pessoa");
-
-    // guarda resposta em pessoas
-    setPessoas(resposta.data);
-  };
-
-  // exclusão de pessoas
-  const deletarPessoa = async (id: number) => {
-
-    const resposta = await api.delete(`/Pessoa/${id}`);
-
-    alert(resposta.data);
-
-    carregarPessoas();
-    carregarTransacoes();
-    carregarTotais();
-  };
+    const [descricao, setDescricao] = useState("");
+    const [valor, setValor] = useState<number | "">("");
+    const [tipo, setTipo] = useState("");
+    const [pessoaId, setPessoaId] = useState(0);
 
 
-  ////////////////// TRANSAÇÕES //////////////////////////////
+    ////////////////// METODOS GERAIS //////////////////////////////
 
-  const carregarTransacoes = async () => {
-    const resposta = await api.get("/Transacao");
-
-    setTransacoes(resposta.data);
-  };
-
-  const criarTransacao = async () => {
-
-    const resposta = await api.post("/Transacao", {
-        descricao,
-        valor,
-        tipo,
-        pessoaId
-    });
-
-    setDescricao("");
-    setValor(0);
-    setTipo("");
-    setPessoaId(0);
-
-    alert(resposta.data);
-
-    carregarTransacoes();
-    carregarTotais();
-  };
+    const [total, setTotal] = useState<Total | null>(null);
 
 
-  ////////////////// METODOS GERAIS //////////////////////////////
+    ///////////////////////////////////////////////////////////
+    ////////////////////// FUNÇÕES /////////////////////////////
+    ///////////////////////////////////////////////////////////
 
-  const carregarTotais = async () => {
+    //////////////// PESSOAS /////////////////////////
 
-    const resposta = await api.get("/Total");
+    // cadastro de pessoas
+    const criarPessoa = async () => {
+        const resposta = await api.post("/Pessoa", {
+        nome: nome,
+        idade: Number(idade)
+        });
 
-    setTotal(resposta.data);
+        setNome("");
+        setIdade("");
 
-  };
+        alert(resposta.data);
+
+        carregarPessoas();
+        carregarTotais();
+    };
+
+    // receber pessoas
+    const carregarPessoas = async() =>
+    {
+        // usa GET da api para receber o JSON
+        const resposta = await api.get("/Pessoa");
+
+        // guarda resposta em pessoas
+        setPessoas(resposta.data);
+    };
+
+    // exclusão de pessoas
+    const deletarPessoa = async (id: number) => {
+
+        const resposta = await api.delete(`/Pessoa/${id}`);
+
+        alert(resposta.data);
+
+        carregarPessoas();
+        carregarTransacoes();
+        carregarTotais();
+    };
 
 
-  ///////////////////////////////////////////////////////////
-  ////////////////////// USE EFFECT //////////////////////////
-  ///////////////////////////////////////////////////////////
+    ////////////////// TRANSAÇÕES //////////////////////////////
 
-  // execute uma vez quando a pagina abrir
-  useEffect(() => {
+    const carregarTransacoes = async () => {
+        const resposta = await api.get("/Transacao");
 
-    carregarPessoas();
-    carregarTransacoes();
-    carregarTotais();
+        setTransacoes(resposta.data);
+    };
 
-  }, []);
+    const criarTransacao = async () => {
+
+        const resposta = await api.post("/Transacao", {
+            descricao,
+            valor: Number(valor),
+            tipo,
+            pessoaId
+        });
+
+        setDescricao("");
+        setValor("");
+        setTipo("");
+        setPessoaId(0);
+
+        alert(resposta.data);
+
+        carregarTransacoes();
+        carregarTotais();
+    };
+
+
+    ////////////////// METODOS GERAIS //////////////////////////////
+
+    const carregarTotais = async () => {
+
+        const resposta = await api.get("/Total");
+
+        setTotal(resposta.data);
+
+    };
+
+
+    ///////////////////////////////////////////////////////////
+    ////////////////////// USE EFFECT //////////////////////////
+    ///////////////////////////////////////////////////////////
+
+    // execute uma vez quando a pagina abrir
+    useEffect(() => {
+
+        carregarPessoas();
+        carregarTransacoes();
+        carregarTotais();
+
+    }, []);
 
 
   ///////////////////////////////////////////////////////////
@@ -149,80 +150,132 @@ function Dashboard() {
 
   return (
     <>
-        <h1>Sistema Financeiro</h1>
+        <header className="navbar">
+
+            <div className="logo">
+
+                <img
+                    src={iconeHeader}
+                    alt="Logo"
+                />
+
+                <h1>Sistema de Controle de Gastos Residenciais</h1>
+
+            </div>
+
+        </header>
 
         {/* =============PESSOA LISTAGEM E EXCLUSÃO=============== */}
         
-        <fieldset>
-            <h2>Listar Pessoas</h2>
+        <div className="container">
 
-            <PessoaList
-                pessoas={pessoas}
-                deletarPessoa={deletarPessoa}
-            />
+            <div className="colunaPessoa">
 
-            {/* =================PESSOA CADASTRO=================== */}
+                <fieldset className="cardListarPessoas">
 
-            <h2>Cadastrar Pessoa</h2>
+                    <h2>Pessoas</h2>
 
-            <PessoaForm
-                nome={nome}
-                idade={idade}
-                setNome={setNome}
-                setIdade={setIdade}
-                criarPessoa={criarPessoa}
-            />
-        </fieldset>
+                    <div className="listapessoas-scroll">
 
-        {/* =================TRANSAÇÃO LISTAGEM=================== */}
+                        <PessoaList
+                            pessoas={pessoas}
+                            deletarPessoa={deletarPessoa}
+                        />
 
-        <fieldset>
-            <h2>Listar Transações</h2>
+                    </div>
 
-            <TransacaoList
-                transacoes={transacoes}
-            />
+                </fieldset>
 
-            {/* =================TRANSAÇÃO CADASTRO=================== */}
+                {/* =================PESSOA CADASTRO=================== */}
 
-            <h2>Cadastrar Transações</h2>
+                <fieldset>
+                    <h2>Cadastrar Pessoa</h2>
 
-            <TransacaoForm
-                descricao={descricao}
-                setDescricao={setDescricao}
+                    <PessoaForm
+                        nome={nome}
+                        idade={idade}
+                        setNome={setNome}
+                        setIdade={setIdade}
+                        criarPessoa={criarPessoa}
+                    />
+                </fieldset>
+            </div>
 
-                valor={valor}
-                setValor={setValor}
+            <fieldset className="fieldsetResumo">
+                {/* =================LISTAGEM GERAL=================== */}
+            
+                <h2>Resumo Geral</h2>
 
-                tipo={tipo}
-                setTipo={setTipo}
+                {total && (
+                    <>
+                        <div className="cards-resumo">
 
-                pessoaId={pessoaId}
-                setPessoaId={setPessoaId}
+                            <TotalCard
+                                titulo="Receitas"
+                                valor={total.totalReceita}
+                            />
 
-                pessoas={pessoas}
+                            <TotalCard
+                                titulo="Despesas"
+                                valor={total.totalDespesa}
+                            />
 
-                criarTransacao={criarTransacao}
+                            <TotalCard
+                                titulo="Saldo"
+                                valor={total.totalSaldo}
+                            />
 
-                />
-        </fieldset>
+                        </div>
 
-        {/* =================LISTAGEM GERAL=================== */}
+                        <div className="listatotal-scroll">
+                            <TotalPessoaList
+                                totalPessoas={total.totaisPessoas}
+                                pessoas={pessoas}
+                            />
+                        </div>
 
-        <fieldset>
-            <h2>Resumo Geral</h2>
+                    </>
+                )}
+            </fieldset>
 
-            {total && (
-                <>
-                    <TotalCard total={total} />
+            <fieldset className="fieldsetTransacoes">
+                {/* =================TRANSAÇÃO LISTAGEM=================== */}
 
-                    <TotalPessoaList
-                        totalPessoas={total.totaisPessoas}
+                <h2>Transações</h2>
+                
+                <div className="listatransacoes-scroll">
+                    <TransacaoList
+                        transacoes={transacoes}
                         pessoas={pessoas}
                     />
-                </>
-            )}
-        </fieldset>
+                </div>
+
+                {/* =================TRANSAÇÃO CADASTRO=================== */}
+
+                <h2 className="cadastrarTransacao">Cadastrar Transação</h2>
+
+                <TransacaoForm
+                    descricao={descricao}
+                    setDescricao={setDescricao}
+
+                    valor={valor}
+                    setValor={setValor}
+
+                    tipo={tipo}
+                    setTipo={setTipo}
+
+                    pessoaId={pessoaId}
+                    setPessoaId={setPessoaId}
+
+                    pessoas={pessoas}
+
+                    criarTransacao={criarTransacao}
+
+                    />
+            </fieldset>
+
+
+        </div>
 
         </>
     );

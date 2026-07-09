@@ -1,5 +1,5 @@
-import type { TotalPessoa } from "../types/TotalPessoa";
-import type { Pessoa } from "../types/Pessoa";
+import type { TotalPessoa } from "../../types/TotalPessoa";
+import type { Pessoa } from "../../types/Pessoa";
 
 interface Props {
     totalPessoas: TotalPessoa[];
@@ -9,29 +9,50 @@ interface Props {
 function TotalPessoaList({ totalPessoas, pessoas }: Props) {
 
     return (
-        <>
-            {totalPessoas.map((totalPessoa) => {
 
-                const pessoa = pessoas.find(
-                    (p) => p.id === totalPessoa.id
-                );
+        <table>
 
-                return (
-                    <div key={totalPessoa.id}>
+            <thead>
+                <tr>
+                    <th>Pessoa</th>
+                    <th>Receita</th>
+                    <th>Despesa</th>
+                    <th>Saldo</th>
+                </tr>
+            </thead>
 
-                        <p>Pessoa: {pessoa?.nome}</p>
+            <tbody>
 
-                        <p>Pessoa Receita: {totalPessoa.pessoaReceita}</p>
+                {totalPessoas.map((totalPessoa) => {
 
-                        <p>Pessoa Despesa: {totalPessoa.pessoaDespesa}</p>
+                    const pessoa = pessoas.find(
+                        p => p.id === totalPessoa.id
+                    );
 
-                        <p>Pessoa Saldo: {totalPessoa.pessoaSaldo}</p>
+                    return (
 
-                    </div>
-                );
-            })}
-        </>
+                        <tr key={totalPessoa.id}>
+
+                            <td>{pessoa?.nome}</td>
+
+                            <td>R$ {totalPessoa.pessoaReceita}</td>
+
+                            <td>R$ {totalPessoa.pessoaDespesa}</td>
+
+                            <td>R$ {totalPessoa.pessoaSaldo}</td>
+
+                        </tr>
+
+                    );
+
+                })}
+
+            </tbody>
+
+        </table>
+
     );
+
 }
 
 export default TotalPessoaList;

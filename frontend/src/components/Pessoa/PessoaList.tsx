@@ -1,4 +1,6 @@
-import type { Pessoa } from "../types/Pessoa";
+import type { Pessoa } from "../../types/Pessoa";
+import iconeDeletar from "../../assets/icons/deletar.png";
+import iconePessoa from "../../assets/icons/pessoa.png";
 
 type Props = {
     pessoas: Pessoa[];
@@ -11,19 +13,32 @@ function PessoaList({ pessoas, deletarPessoa }: Props) {
         <>
             {pessoas.map((pessoa) => (
 
-                <div key={pessoa.id}>
+                <fieldset className="cardPessoa" key={pessoa.id}>
 
-                    <h3>{pessoa.nome}</h3>
+                    <div className="infoPessoa">
 
-                    <p>Idade: {pessoa.idade}</p>
+                        <img src={iconePessoa} alt="iconePessoa" className="iconePessoa"/>
 
-                    <p>Id: {pessoa.id}</p>
+                        <div>
 
-                    <button onClick={() => deletarPessoa(pessoa.id)}>
-                        Excluir
-                    </button>
+                            <h3>{pessoa.nome}</h3>
 
-                </div>
+                            <p>Idade: {pessoa.idade}</p>
+
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <button onClick={() => deletarPessoa(pessoa.id)} className="buttonDeletar">
+                            <img src={iconeDeletar} alt="iconeDeletar"/>
+                        </button>
+
+                    </div>
+
+                    
+                </fieldset>
 
             ))}
         </>

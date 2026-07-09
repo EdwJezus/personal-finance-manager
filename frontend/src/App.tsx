@@ -2,10 +2,13 @@ import { useEffect, useState} from "react";
 import api from "./services/api";
 import type { Pessoa } from "./types/Pessoa";
 import type { Transacao } from "./types/Transacao";
+import type { Total } from "./types/Total";
 import PessoaList from "./components/PessoaList";
 import PessoaForm from "./components/PessoaForm";
 import TransacaoList from "./components/TransacaoList";
 import TransacaoForm from "./components/TransacaoForm";
+import TotalCard from "./components/TotalCard";
+import TotalPessoaList from "./components/TotalPessoaList";
 
 function App() {
 
@@ -30,6 +33,7 @@ function App() {
     alert(resposta.data);
 
     carregarPessoas();
+    carregarTotais();
   };
 
   // receber pessoas
@@ -47,6 +51,7 @@ function App() {
 
     carregarPessoas();
     carregarTransacoes();
+    carregarTotais();
 
   }, []);
 
@@ -59,10 +64,13 @@ function App() {
 
     carregarPessoas();
     carregarTransacoes();
+    carregarTotais();
   };
+
 
   ////////////////// TRANSAÇÕES //////////////////////////////
   
+
   const [transacoes, setTransacoes] = useState<Transacao[]>([]);
 
   const carregarTransacoes = async () => {
@@ -93,6 +101,20 @@ function App() {
     alert(resposta.data);
 
     carregarTransacoes();
+    carregarTotais();
+  };
+
+
+  ////////////////// METODOS GERAIS //////////////////////////////
+
+  const [total, setTotal] = useState<Total | null>(null);
+
+  const carregarTotais = async () => {
+
+    const resposta = await api.get("/Total");
+
+    setTotal(resposta.data);
+
   };
 
   ///////////////////////////////////////////////////////////
@@ -153,7 +175,23 @@ function App() {
           pessoas={pessoas}
 
           criarTransacao={criarTransacao}
-      />
+
+        />
+
+      {/* =================LISTAGEM GERAL=================== */}
+
+      <h2>Resumo Geral</h2>
+
+      {total && (
+          <>
+              <TotalCard total={total} />
+
+              <TotalPessoaList
+                  totalPessoas={total.totaisPessoas}
+                  pessoas={pessoas}
+              />
+          </>
+      )}
 
     </>
   );

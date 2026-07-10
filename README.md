@@ -89,6 +89,12 @@ A aplicação possui uma interface desenvolvida em React contendo:
 
 ------------------------------------------------------------------------
 
+## Diagrama de Classes
+
+<img width="862" height="472" alt="Diagrama Classes personal-finance-manager" src="https://github.com/user-attachments/assets/493185e6-a313-453d-8c50-604f4ac87d42" />
+
+------------------------------------------------------------------------
+
 ## Pré-requisitos
 
 Antes de executar o projeto, certifique-se de possuir instalado:

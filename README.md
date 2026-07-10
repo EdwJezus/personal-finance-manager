@@ -89,6 +89,26 @@ A aplicação possui uma interface desenvolvida em React contendo:
 
 ------------------------------------------------------------------------
 
+## Pré-requisitos
+
+Antes de executar o projeto, certifique-se de possuir instalado:
+
+- .NET 10 SDK
+- Node.js (versão 20.19 ou superior)
+- npm
+
+------------------------------------------------------------------------
+
+## Banco de Dados
+
+O projeto utiliza **SQLite** como banco de dados local, integrado ao **Entity Framework Core**.
+
+O banco de dados é armazenado no arquivo:
+
+backend/Database/finance.db
+
+------------------------------------------------------------------------
+
 # Como Executar
 
 ## Backend
